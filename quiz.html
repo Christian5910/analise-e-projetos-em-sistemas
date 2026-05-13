@@ -1,0 +1,480 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Análise de Sistemas · Quiz Interativo</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📊</text></svg>">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+<!-- Navbar (idêntica à do site) -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm">
+    <div class="container">
+        <a class="navbar-brand fw-bold" href="index.html"><i class="bi bi-pc-display-horizontal me-2"></i>Análise de Sistemas</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="menu">
+            <div class="navbar-nav ms-auto">
+                <a class="nav-link" href="index.html">Home</a>
+                <a class="nav-link" href="cont.html">Conteúdo</a>
+                <a class="nav-link active fw-semibold" href="quiz.html">Quiz</a>
+                <a class="nav-link" href="faq.html">FAQ</a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<div class="container py-5">
+    <div class="card border-0 p-4 bg-white shadow-sm rounded-4">
+        <div class="text-center mb-4">
+            <h2 class="text-primary fw-bold"><i class="bi bi-question-circle-fill me-2"></i>Quiz: Análise de Sistemas</h2>
+            <p class="text-muted fs-5">Teste seus conhecimentos com 20 questões baseadas no conteúdo estudado.</p>
+        </div>
+        <hr>
+        <br>
+        <!-- QUIZ EMBUTIDO -->
+        <div class="quiz-container-embedded">
+            <div class="gemini-panel" id="quizRoot" style="max-width: 100%; border-radius: 28px;">
+                <div class="panel-toolbar">
+                    <div class="toolbar-left">
+                        <span class="toolbar-title">Desafio de Conhecimentos</span>
+                    </div>
+                    <!-- Botão de compartilhar removido -->
+                </div>
+                <div id="dynamicContent" class="panel-content"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    // ==================== BANCO DE 20 PERGUNTAS SOBRE ANÁLISE DE SISTEMAS ====================
+    const RAW_QUESTIONS = [
+        // 1. Definição e Importância
+        {
+            text: "Qual é o principal objetivo da Análise de Sistemas?",
+            options: [
+                "Escrever códigos eficientes em várias linguagens.",
+                "Compreender, modelar e especificar os requisitos de um sistema de informação.",
+                "Gerenciar a infraestrutura de rede da empresa.",
+                "Realizar testes de usabilidade em softwares prontos."
+            ],
+            correct: 1,
+            hint: "O foco é fazer a ponte entre o problema organizacional e a solução tecnológica.",
+            explanation: "A análise de sistemas investiga e modela requisitos, garantindo que o software atenda às necessidades do negócio e dos usuários."
+        },
+        {
+            text: "Por que a análise de sistemas é considerada crítica para evitar retrabalho?",
+            options: [
+                "Porque ela automatiza a geração de código.",
+                "Porque erros descobertos na fase de análise custam até 100x menos para corrigir do que na produção.",
+                "Porque substitui a necessidade de testes.",
+                "Porque elimina a comunicação com o cliente."
+            ],
+            correct: 1,
+            hint: "Quanto mais tarde um erro é encontrado, mais caro é corrigi-lo.",
+            explanation: "Corrigir defeitos na fase de análise é muito mais barato do que após a implantação, pois evita retrabalho em design, código e testes."
+        },
+        {
+            text: "No exemplo do e-commerce com problemas no pagamento, qual ação NÃO condiz com a atuação do analista?",
+            options: [
+                "Mapear a jornada do usuário.",
+                "Trocar a cor do botão de compra imediatamente.",
+                "Analisar falhas de integração com a API do banco.",
+                "Propor um novo fluxo de dados."
+            ],
+            correct: 1,
+            hint: "O analista não age com soluções superficiais; ele investiga a causa raiz.",
+            explanation: "Trocar a cor do botão é uma mudança superficial. O analista investiga processos, integrações e propõe melhorias estruturais."
+        },
+        // 4. Evolução dos Sistemas de Informação
+        {
+            text: "Característica marcante da era dos Mainframes (décadas de 60-70):",
+            options: [
+                "Processamento distribuído e PCs conectados em rede.",
+                "Sistemas centralizados com processamento em lote (batch).",
+                "Computação em nuvem e SaaS.",
+                "Uso massivo de dispositivos móveis."
+            ],
+            correct: 1,
+            hint: "Nessa época, os usuários não interagiam diretamente com os sistemas.",
+            explanation: "Mainframes eram grandes computadores centrais que processavam lotes de dados sem interação direta do usuário."
+        },
+        {
+            text: "Qual inovação tecnológica dos anos 80 permitiu a descentralização dos sistemas de informação?",
+            options: [
+                "A internet comercial.",
+                "Os microcomputadores e as redes locais (LAN).",
+                "A computação em nuvem.",
+                "Os sistemas baseados em inteligência artificial."
+            ],
+            correct: 1,
+            hint: "Foi a época da popularização dos PCs.",
+            explanation: "Microcomputadores (PCs) e redes LAN permitiram que os sistemas fossem usados diretamente pelos funcionários, descentralizando o processamento."
+        },
+        {
+            text: "Qual preocupação PASSOU a fazer parte da análise de sistemas com a chegada da internet e dos sistemas web (anos 90-2000)?",
+            options: [
+                "Processamento em lote.",
+                "Usabilidade e segurança.",
+                "Modelagem de dados em mainframes.",
+                "Uso exclusivo de linguagens assembly."
+            ],
+            correct: 1,
+            hint: "A web trouxe novos desafios de interface e proteção contra ataques.",
+            explanation: "Com a web, os sistemas ficaram expostos a ameaças e passaram a exigir interfaces amigáveis, aumentando o foco em usabilidade e segurança."
+        },
+        // 7. Papéis e Responsabilidades
+        {
+            text: "Qual profissional é responsável por levantar, documentar e validar as necessidades dos stakeholders?",
+            options: [
+                "Analista de Dados",
+                "Analista de Processos",
+                "Analista de Requisitos",
+                "Analista de Testes"
+            ],
+            correct: 2,
+            hint: "Ele conduz entrevistas e workshops para entender o que o sistema deve fazer.",
+            explanation: "O Analista de Requisitos é o principal ponto de contato com o cliente para capturar e formalizar as necessidades do negócio."
+        },
+        {
+            text: "O entregável típico do Analista de Processos é:",
+            options: [
+                "Diagrama BPMN (mapeamento de fluxos).",
+                "Plano de Testes.",
+                "MER (Modelo Entidade-Relacionamento).",
+                "Documento de Especificação de Requisitos."
+            ],
+            correct: 0,
+            hint: "BPMN é uma notação para processos de negócio.",
+            explanation: "O Analista de Processos utiliza BPMN para modelar fluxos de trabalho (AS-IS e TO-BE), identificando gargalos e oportunidades de melhoria."
+        },
+        {
+            text: "Qual entregável é associado ao Analista de Dados / Modelador?",
+            options: [
+                "Wireframes de interface.",
+                "Modelo Entidade-Relacionamento (MER/DER).",
+                "Código fonte da aplicação.",
+                "Relatório de testes de integração."
+            ],
+            correct: 1,
+            hint: "Este profissional define a estrutura de banco de dados.",
+            explanation: "O Analista de Dados cria modelos conceituais e lógicos (MER) que representam entidades, atributos e relacionamentos do sistema."
+        },
+        // 10. Ciclo de Vida CVDS
+        {
+            text: "Na fase de 'Levantamento de Requisitos' do CVDS, o principal entregável é:",
+            options: [
+                "O código funcional do sistema.",
+                "O protótipo de alta fidelidade.",
+                "O Documento de Especificação de Requisitos.",
+                "O plano de implantação."
+            ],
+            correct: 2,
+            hint: "Nessa fase se define 'o que' o sistema deve fazer.",
+            explanation: "O Documento de Especificação de Requisitos (ERS) descreve todas as funcionalidades e restrições do sistema, aprovado pelos stakeholders."
+        },
+        {
+            text: "Qual fase do CVDS compreende a arquitetura, modelagem de banco de dados e criação de wireframes?",
+            options: [
+                "Implementação",
+                "Testes e Validação",
+                "Análise e Projeto (Design)",
+                "Implantação e Manutenção"
+            ],
+            correct: 2,
+            hint: "É a fase do 'como' resolver o problema.",
+            explanation: "Na fase de Análise e Projeto, o analista define a arquitetura, modela dados e desenha as interfaces, antes da codificação."
+        },
+        {
+            text: "Qual fase do CVDS tem como objetivo 'quebrar o sistema antes que o usuário o faça'?",
+            options: [
+                "Levantamento de Requisitos",
+                "Implementação",
+                "Testes e Validação",
+                "Implantação"
+            ],
+            correct: 2,
+            hint: "Testes unitários, de integração e de estresse são realizados aqui.",
+            explanation: "A fase de Testes busca identificar defeitos e garantir a qualidade do software antes de liberá-lo para produção."
+        },
+        // 13. Metodologias e Abordagens
+        {
+            text: "Qual característica define o modelo Cascata (Waterfall)?",
+            options: [
+                "Iterações curtas e entregas incrementais.",
+                "Abordagem linear e rígida, onde uma fase só começa quando a anterior termina.",
+                "Flexibilidade para mudanças constantes de requisitos.",
+                "Uso obrigatório de quadros Kanban."
+            ],
+            correct: 1,
+            hint: "É um modelo sequencial, como uma cachoeira.",
+            explanation: "O Cascata é rígido e adequado para projetos com escopo fechado e requisitos imutáveis (ex: sistemas críticos)."
+        },
+        {
+            text: "Qual metodologia ágil é conhecida por entregas rápidas de valor, iterações e adaptação a mudanças?",
+            options: [
+                "Cascata",
+                "Scrum / Kanban",
+                "Modelo em V",
+                "Prototipação descartável"
+            ],
+            correct: 1,
+            hint: "O manifesto ágil valoriza indivíduos, interações e resposta a mudanças.",
+            explanation: "Scrum e Kanban são metodologias ágeis que promovem entregas frequentes e adaptabilidade, ideais para ambientes dinâmicos."
+        },
+        {
+            text: "A notação UML é amplamente usada para:",
+            options: [
+                "Mapeamento de processos de negócio (BPMN).",
+                "Especificar sistemas orientados a objetos, com diagramas de classe e casos de uso.",
+                "Documentar requisitos não funcionais.",
+                "Gerenciar projetos com quadros Kanban."
+            ],
+            correct: 1,
+            hint: "UML significa Unified Modeling Language.",
+            explanation: "UML é a linguagem padrão para modelagem de software orientado a objetos, incluindo diagramas estruturais e comportamentais."
+        },
+        {
+            text: "Qual abordagem é focada no mapeamento e melhoria contínua dos processos de negócios da empresa?",
+            options: [
+                "UML",
+                "BPMN",
+                "Cascata",
+                "Scrum"
+            ],
+            correct: 1,
+            hint: "BPMN é uma notação para processos de negócio.",
+            explanation: "BPMN (Business Process Model and Notation) é usada para modelar fluxos de trabalho, identificar gargalos e otimizar processos organizacionais."
+        },
+        // 17. Habilidades Essenciais
+        {
+            text: "Dentre as hard skills (técnicas) essenciais para um analista de sistemas, NÃO se inclui:",
+            options: [
+                "Modelagem UML",
+                "SQL e bancos de dados",
+                "Comunicação clara e escuta ativa",
+                "BPMN"
+            ],
+            correct: 2,
+            hint: "Hard skills são habilidades técnicas; soft skills são comportamentais.",
+            explanation: "Comunicação clara e escuta ativa são soft skills, importantes mas não técnicas. As hard skills incluem UML, SQL, BPMN, prototipação, etc."
+        },
+        {
+            text: "Qual skill comportamental (soft skill) é fundamental para que o analista entenda verdadeiramente as dores do cliente?",
+            options: [
+                "Conhecimento de programação",
+                "Empatia com o usuário",
+                "Domínio de BPMN",
+                "Certificação em Scrum"
+            ],
+            correct: 1,
+            hint: "Colocar-se no lugar do outro ajuda a captar necessidades implícitas.",
+            explanation: "Empatia permite ao analista compreender as dificuldades dos usuários e propor soluções que realmente resolvam seus problemas."
+        },
+        {
+            text: "Segundo o material, o diferencial competitivo do analista de sistemas é:",
+            options: [
+                "Ser expert em uma única linguagem de programação.",
+                "Saber traduzir a linguagem de negócios para a linguagem técnica e vice-versa.",
+                "Trabalhar exclusivamente com metodologia Cascata.",
+                "Evitar contato direto com o cliente."
+            ],
+            correct: 1,
+            hint: "O analista é uma ponte entre dois mundos.",
+            explanation: "A capacidade de comunicação bidirecional entre negócio e TI é o que torna o analista indispensável para o sucesso do projeto."
+        },
+        {
+            text: "Qual prática é recomendada para um analista que deseja se manter atualizado?",
+            options: [
+                "Ignorar novas metodologias e ferramentas.",
+                "Conhecer desde integrações legadas (mainframe) até arquiteturas serverless.",
+                "Focar apenas em soft skills.",
+                "Evitar o uso de notações como UML e BPMN."
+            ],
+            correct: 1,
+            hint: "O mercado exige visão abrangente, do legado à nuvem.",
+            explanation: "Um bom analista entende tecnologias antigas e modernas, permitindo decisões adequadas ao contexto da empresa."
+        }
+    ];
+
+    // Função de embaralhamento (Fisher-Yates)
+    function shuffleArray(arr) {
+        for (let i = arr.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [arr[i], arr[j]] = [arr[j], arr[i]];
+        }
+        return arr;
+    }
+
+    // Constrói um novo quiz com ordem de perguntas e opções embaralhadas
+    function buildShuffledQuiz() {
+        const shuffledQuestions = shuffleArray([...RAW_QUESTIONS]);
+        return shuffledQuestions.map(q => {
+            const originalOptions = [...q.options];
+            const correctAnswerText = originalOptions[q.correct];
+            const shuffledOptions = shuffleArray([...originalOptions]);
+            const newCorrectIndex = shuffledOptions.findIndex(opt => opt === correctAnswerText);
+            return {
+                text: q.text,
+                options: shuffledOptions,
+                correct: newCorrectIndex,
+                hint: q.hint,
+                explanation: q.explanation
+            };
+        });
+    }
+
+    // Estado global
+    let QUIZ_DATA = [];
+    let currentIndex = 0;
+    let userAnswers = [];
+    let answerStatus = [];
+    let quizFinished = false;
+    const contentDiv = document.getElementById("dynamicContent");
+
+    function saveProgress() {
+        const toSave = { currentIndex, userAnswers, answerStatus, quizFinished, quizData: QUIZ_DATA };
+        localStorage.setItem("analise_sistemas_quiz", JSON.stringify(toSave));
+    }
+
+    function loadProgress() {
+        const raw = localStorage.getItem("analise_sistemas_quiz");
+        if (!raw) return false;
+        try {
+            const saved = JSON.parse(raw);
+            if (saved && saved.userAnswers && saved.userAnswers.length === RAW_QUESTIONS.length) {
+                currentIndex = saved.currentIndex;
+                userAnswers = saved.userAnswers;
+                answerStatus = saved.answerStatus;
+                quizFinished = saved.quizFinished;
+                QUIZ_DATA = saved.quizData;
+                return true;
+            }
+        } catch(e) {}
+        return false;
+    }
+
+    function resetQuiz() {
+        QUIZ_DATA = buildShuffledQuiz();
+        currentIndex = 0;
+        userAnswers = new Array(QUIZ_DATA.length).fill(null);
+        answerStatus = new Array(QUIZ_DATA.length).fill(null);
+        quizFinished = false;
+        saveProgress();
+        renderCurrentQuestion();
+    }
+
+    function getScore() {
+        let correct = 0;
+        for (let i = 0; i < answerStatus.length; i++) if (answerStatus[i] === true) correct++;
+        return correct;
+    }
+    function getErrors() {
+        let errors = 0;
+        for (let i = 0; i < answerStatus.length; i++) if (answerStatus[i] === false) errors++;
+        return errors;
+    }
+
+    function renderProgressAndStats() {
+        const total = QUIZ_DATA.length;
+        const stepsHtml = QUIZ_DATA.map((_, idx) => {
+            let className = "step-dot";
+            if (idx === currentIndex) className += " active";
+            else if (answerStatus[idx] === true) className += " completed";
+            return `<div class="${className}"></div>`;
+        }).join("");
+        return `
+            <div class="progress-row">
+                <div class="steps-container">${stepsHtml}</div>
+                <div class="stats-row">
+                    <div class="question-counter">${currentIndex+1} / ${total}</div>
+                    <div class="score-badges">
+                        <div class="badge-correct"><span class="badge-icon">✓</span> ${getScore()}</div>
+                        <div class="badge-incorrect"><span class="badge-icon">✗</span> ${getErrors()}</div>
+                    </div>
+                </div>
+            </div>
+        `;
+    }
+
+    function escapeHtml(str) {
+        return str.replace(/[&<>]/g, m => m === '&' ? '&amp;' : (m === '<' ? '&lt;' : '&gt;')).replace(/`/g, '&#96;');
+    }
+
+    function renderCurrentQuestion() {
+        if (quizFinished || currentIndex >= QUIZ_DATA.length) { showResultScreen(); return; }
+        const q = QUIZ_DATA[currentIndex];
+        const alreadyAnswered = (userAnswers[currentIndex] !== null);
+        const selectedIdx = userAnswers[currentIndex];
+        const letters = ["A", "B", "C", "D"];
+        let optionsHtml = "";
+        q.options.forEach((opt, idx) => {
+            let extraClass = "", disabled = alreadyAnswered ? "disabled" : "";
+            if (alreadyAnswered) {
+                if (idx === q.correct) extraClass = " correct-highlight";
+                else if (idx === selectedIdx && idx !== q.correct) extraClass = " wrong-highlight";
+                disabled = "disabled";
+            }
+            optionsHtml += `<button class="option-card${extraClass}" data-opt-index="${idx}" ${disabled}><span class="option-prefix">${letters[idx]}.</span><span>${escapeHtml(opt)}</span></button>`;
+        });
+        let explanationHtml = "";
+        if (alreadyAnswered) {
+            const correctAnswerText = q.options[q.correct];
+            const isCorrect = (selectedIdx === q.correct);
+            explanationHtml = `<div class="explanation-box">${isCorrect ? `✅ Correto! ${q.explanation}` : `❌ Errado. A resposta correta é "${correctAnswerText}". ${q.explanation}`}</div>`;
+        }
+        const hintId = `hint_${currentIndex}`;
+        const hintHtml = `<div class="hint-wrapper"><button class="hint-trigger" data-hint-id="${hintId}">💡 Mostrar dica <span style="font-size:18px;">⌵</span></button><div id="${hintId}" class="hint-text">${escapeHtml(q.hint)}</div></div>`;
+        const nextDisabled = !alreadyAnswered ? "disabled" : "";
+        const nextHtml = `<div class="next-container"><button class="next-button ${nextDisabled}" id="nextQuestionBtn" ${nextDisabled}>Avançar</button></div>`;
+        contentDiv.innerHTML = renderProgressAndStats() + `<div class="question-text">${escapeHtml(q.text)}</div><div class="options-grid" id="optionsGrid">${optionsHtml}</div>${explanationHtml}${hintHtml}${nextHtml}`;
+
+        document.querySelectorAll(".option-card:not([disabled])").forEach(btn => {
+            btn.addEventListener("click", () => {
+                if (userAnswers[currentIndex] !== null) return;
+                const chosenIdx = parseInt(btn.dataset.optIndex);
+                userAnswers[currentIndex] = chosenIdx;
+                answerStatus[currentIndex] = (chosenIdx === q.correct);
+                saveProgress();
+                renderCurrentQuestion();
+            });
+        });
+        const hintBtn = document.querySelector(".hint-trigger");
+        if (hintBtn) hintBtn.addEventListener("click", () => document.getElementById(hintId)?.classList.toggle("show"));
+        const nextBtn = document.getElementById("nextQuestionBtn");
+        if (nextBtn && alreadyAnswered) {
+            nextBtn.addEventListener("click", () => {
+                if (currentIndex + 1 < QUIZ_DATA.length) { currentIndex++; renderCurrentQuestion(); saveProgress(); }
+                else { quizFinished = true; saveProgress(); showResultScreen(); }
+            });
+        }
+    }
+
+    function showResultScreen() {
+        const total = QUIZ_DATA.length, correct = getScore();
+        const percent = Math.round((correct / total) * 100);
+        let feedback = "";
+        if (percent === 100) feedback = "Excelente! Você domina Análise de Sistemas! 🎓";
+        else if (percent >= 80) feedback = "Muito bom! Reforce alguns conceitos e será um expert. 👍";
+        else if (percent >= 60) feedback = "Bom trabalho! Reveja os módulos para melhorar ainda mais. 📚";
+        else feedback = "Que tal revisar o conteúdo? Você pode ir muito além! 💪";
+        contentDiv.innerHTML = `<div class="result-container"><div style="font-size:72px;">🏆</div><div class="final-score-text">${correct} / ${total}</div><div style="margin: 16px 0;">${feedback}</div><button class="restart-quiz" id="restartQuizBtn">Tentar Novamente</button></div>`;
+        document.getElementById("restartQuizBtn")?.addEventListener("click", () => resetQuiz());
+    }
+
+    // Inicialização
+    const loaded = loadProgress();
+    if (loaded && QUIZ_DATA && QUIZ_DATA.length === RAW_QUESTIONS.length && !quizFinished && currentIndex < QUIZ_DATA.length) renderCurrentQuestion();
+    else if (loaded && quizFinished) showResultScreen();
+    else resetQuiz();
+</script>
+</body>
+</html>

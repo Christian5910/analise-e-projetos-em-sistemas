@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>FAQ · Análise de Sistemas</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>❓</text></svg>">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Navbar idêntica à de conteúdo -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm">
+    <div class="container">
+        <a class="navbar-brand fw-bold" href="index.html"><i class="bi bi-pc-display-horizontal me-2"></i>Análise de Sistemas</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="menu">
+            <div class="navbar-nav ms-auto">
+                <a class="nav-link" href="index.html">Home</a>
+                <a class="nav-link" href="cont.html">Conteúdo</a>
+                <a class="nav-link" href="quiz.html">Quiz</a>
+                <a class="nav-link active fw-semibold" href="faq.html">FAQ</a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!-- Container principal -->
+<div class="container py-5">
+    <div class="card border-0 shadow-lg rounded-4">
+        <!-- Cabeçalho da FAQ -->
+        <div class="faq-header text-white p-4 p-md-5">
+            <div class="d-flex align-items-center mb-3">
+                <span class="icon-circle"><i class="bi bi-question-lg"></i></span>
+                <h2 class="fw-bold mb-0">Perguntas Frequentes</h2>
+            </div>
+            <p class="mb-0 opacity-75 fs-5">Respostas diretas e aprofundadas para os principais questionamentos sobre Análise de Sistemas.</p>
+        </div>
+
+        <!-- Accordion melhorado -->
+        <div class="p-4 p-md-5">
+            <div class="accordion accordion-flush" id="faqAccordion">
+
+                <!-- Pergunta 1 -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#q1">
+                            <i class="bi bi-person-gear me-3 text-primary fs-5"></i> O que faz um analista de sistemas?
+                        </button>
+                    </h2>
+                    <div id="q1" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            <p>O analista de sistemas é o <strong>tradutor entre o negócio e a tecnologia</strong>. Ele:</p>
+                            <ul>
+                                <li>Levanta requisitos através de entrevistas, workshops e observação.</li>
+                                <li>Modela processos com <span class="badge-tag">BPMN</span> e especifica sistemas com <span class="badge-tag">UML</span>.</li>
+                                <li>Acompanha testes, homologação e implantação.</li>
+                                <li>Atua como facilitador da comunicação entre stakeholders e equipe técnica.</li>
+                            </ul>
+                            <div class="highlight-answer">
+                                <strong>🔎 Na prática:</strong> É a pessoa que garante que o software resolva o problema certo, da maneira certa.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pergunta 2 -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#q2">
+                            <i class="bi bi-diagram-3 me-3 text-primary fs-5"></i> Diferença entre Análise e Projeto de Sistemas
+                        </button>
+                    </h2>
+                    <div id="q2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <div class="p-3 bg-light rounded-3">
+                                        <strong><i class="bi bi-search me-2"></i> Análise</strong>
+                                        <p class="mb-0 small">Define <strong>O QUÊ</strong> o sistema deve fazer. Foca nos requisitos funcionais e não funcionais.</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="p-3 bg-light rounded-3">
+                                        <strong><i class="bi bi-pencil-square me-2"></i> Projeto</strong>
+                                        <p class="mb-0 small">Define <strong>COMO</strong> o sistema será construído. Escolhe arquitetura, tecnologias e padrões.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pergunta 3: Cascata vs Ágil -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#q3">
+                            <i class="bi bi-water me-3 text-primary fs-5"></i> Modelo Cascata ainda é usado?
+                        </button>
+                    </h2>
+                    <div id="q3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            <p>Sim, ambos coexistem:</p>
+                            <ul>
+                                <li><strong>Cascata (Waterfall):</strong> ideal para projetos com escopo fixo, alta regulamentação (aviação, saúde).</li>
+                                <li><strong>Ágil (Scrum, Kanban):</strong> melhor quando há incerteza, necessidade de feedback rápido e entregas incrementais.</li>
+                            </ul>
+                            <p class="mb-0"><em>O analista moderno deve saber atuar nos dois contextos.</em></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pergunta 4: BPMN -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#q4">
+                            <i class="bi bi-share me-3 text-primary fs-5"></i> O que é BPMN?
+                        </button>
+                    </h2>
+                    <div id="q4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            <p><strong>Business Process Model and Notation</strong> – linguagem visual padronizada para mapear processos de negócio. Usada para:</p>
+                            <ul>
+                                <li>Documentar fluxos atuais (AS-IS).</li>
+                                <li>Propor melhorias (TO-BE).</li>
+                                <li>Alinhar o entendimento entre áreas de negócio e TI.</li>
+                            </ul>
+                            <div class="highlight-answer">
+                                <strong>💼 Mercado:</strong> Conhecimento em BPMN é frequentemente exigido em vagas para analistas de processos e de sistemas.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pergunta 5: Linguagens de programação -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#q5">
+                            <i class="bi bi-code-slash me-3 text-primary fs-5"></i> Linguagens de programação necessárias
+                        </button>
+                    </h2>
+                    <div id="q5" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            <p>Não é obrigatório ser um desenvolvedor, mas é fundamental <strong>dialogar com a equipe técnica</strong>. Conhecimentos valorizados:</p>
+                            <div>
+                                <span class="badge-tag">SQL</span>
+                                <span class="badge-tag">Python</span>
+                                <span class="badge-tag">Java</span>
+                                <span class="badge-tag">C#</span>
+                                <span class="badge-tag">JavaScript básico</span>
+                            </div>
+                            <p class="mt-2 small">Compreender lógica, estruturas de dados e integrações (APIs) faz diferença na hora de especificar sistemas.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pergunta 6: Requisitos funcionais e não funcionais -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#q6">
+                            <i class="bi bi-list-check me-3 text-primary fs-5"></i> Requisito funcional x não funcional
+                        </button>
+                    </h2>
+                    <div id="q6" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            <p><strong>Funcional:</strong> Ação que o sistema executa (ex.: "o sistema deve permitir cadastrar um cliente").</p>
+                            <p><strong>Não funcional:</strong> Qualidade do sistema (ex.: "a tela de login deve carregar em menos de 2 segundos").</p>
+                            <div class="highlight-answer">
+                                <strong>📋 Exemplo real:</strong> Um requisito funcional para um banco: "transferir fundos entre contas". Um não funcional: "a transferência deve ser concluída em até 10 segundos com criptografia TLS 1.3".
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pergunta 7: Desafios atuais -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#q7">
+                            <i class="bi bi-cpu me-3 text-primary fs-5"></i> Principais desafios na análise de sistemas
+                        </button>
+                    </h2>
+                    <div id="q7" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            <ul>
+                                <li><strong>Integração com sistemas legados:</strong> muitos ambientes convivem com mainframes e APIs modernas.</li>
+                                <li><strong>Big Data e Analytics:</strong> pensar no volume de dados desde a análise.</li>
+                                <li><strong>Segurança e LGPD:</strong> requisitos de privacidade impactam a modelagem.</li>
+                                <li><strong>Cloud e microsserviços:</strong> arquiteturas distribuídas exigem nova mentalidade.</li>
+                                <li><strong>Ética digital:</strong> garantir que o sistema não reproduza vieses ou viole direitos.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pergunta 8: Ferramentas CASE -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#q8">
+                            <i class="bi bi-tools me-3 text-primary fs-5"></i> Ferramentas CASE
+                        </button>
+                    </h2>
+                    <div id="q8" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            <p><strong>Computer-Aided Software Engineering</strong> – softwares que ajudam na modelagem, documentação e até geração de código. Exemplos populares:</p>
+                            <div>
+                                <span class="badge-tag">Enterprise Architect</span>
+                                <span class="badge-tag">Visual Paradigm</span>
+                                <span class="badge-tag">Lucidchart</span>
+                                <span class="badge-tag">Astah</span>
+                            </div>
+                            <p class="mt-2 small">Elas aumentam a produtividade e garantem aderência a padrões como UML e BPMN.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pergunta 9: Importância do CVDS -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#q9">
+                            <i class="bi bi-arrow-repeat me-3 text-primary fs-5"></i> Por que o Ciclo de Vida (CVDS) é importante?
+                        </button>
+                    </h2>
+                    <div id="q9" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            <p>O CVDS oferece uma <strong>estrutura organizada</strong> que reduz riscos e evita retrabalho. Ele garante que:</p>
+                            <ul>
+                                <li>Nenhuma etapa crítica seja ignorada.</li>
+                                <li>Os stakeholders tenham visibilidade do progresso.</li>
+                                <li>A qualidade seja verificada antes da entrega final.</li>
+                            </ul>
+                            <p class="mb-0"><em>Mesmo em metodologias ágeis, as fases do ciclo (levantamento, projeto, testes etc.) continuam existindo, apenas de forma iterativa.</em></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pergunta 10: Como iniciar na carreira -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#q10">
+                            <i class="bi bi-briefcase me-3 text-primary fs-5"></i> Como iniciar na carreira de análise de sistemas?
+                        </button>
+                    </h2>
+                    <div id="q10" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            <ol>
+                                <li><strong>Formação:</strong> cursos como Análise e Desenvolvimento de Sistemas, Sistemas de Informação ou Ciência da Computação.</li>
+                                <li><strong>Habilidades técnicas:</strong> estude modelagem (UML, BPMN), SQL, e conceitos de APIs.</li>
+                                <li><strong>Soft skills:</strong> pratique comunicação, escrita de documentos e resolução de conflitos.</li>
+                                <li><strong>Portfólio:</strong> documente pequenos projetos de levantamento de requisitos e protótipos.</li>
+                                <li><strong>Certificações:</strong> considere ECBA, CBAP ou cursos de Product Owner/Scrum Master.</li>
+                            </ol>
+                            <div class="highlight-answer">
+                                <strong>🌟 Dica:</strong> participe de grupos de estudo e contribua em projetos open-source como analista voluntário para ganhar experiência.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chamada para ação -->
+            <div class="text-center mt-5">
+                <p class="text-muted">Não encontrou o que procurava?</p>
+                <a href="cont.html" class="btn btn-primary px-4 py-2 fw-semibold">
+                    <i class="bi bi-journal-text me-2"></i>Explore a Trilha de Conhecimento
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
